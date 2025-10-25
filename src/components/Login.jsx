@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
+import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../utils/constants";
 
@@ -15,7 +14,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const res = await axios.post(
-        baseUrl+"/login",
+        baseUrl + "/login",
         {
           email,
           password,
@@ -25,7 +24,7 @@ const Login = () => {
         }
       );
 
-      console.log("response", res?.data?.data);
+      
 
       dispatch(addUser(res?.data?.data));
 
