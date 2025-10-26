@@ -31,7 +31,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="overflow-y-scroll ">
       <Navbar />
       <Outlet />
       <Footer />
