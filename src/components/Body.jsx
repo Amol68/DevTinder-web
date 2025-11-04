@@ -22,7 +22,7 @@ const Body = () => {
       dispatch(addUser(user.data));
     } catch (err) {
       navigate("/login");
-      alert(err);
+     
     }
   };
 
@@ -31,7 +31,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="overflow-y-scroll ">
+    <div className=" ">
       <Navbar />
       <Outlet />
       <Footer />

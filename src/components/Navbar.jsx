@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { baseUrl } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import { deleteFeed } from "../utils/feedSlice";
-import defaultUser from "../assets/images/defaultUser.jpeg"
+import defaultUser from "../assets/images/defaultUser.jpeg";
 const Navbar = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -41,7 +41,10 @@ const Navbar = () => {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-20 rounded-full ">
-              <img alt="Tailwind CSS Navbar component" src={user.photoUrl || defaultUser} />
+              <img
+                alt="Tailwind CSS Navbar component"
+                src={user.photoUrl || defaultUser}
+              />
             </div>
           </div>
           <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box  w-52 mt-40 p-2 shadow">
@@ -52,7 +55,10 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a>Settings</a>
+              <Link to="/connections">Connections</Link>
+            </li>
+             <li>
+              <Link to="/requests">Requests</Link>
             </li>
             <li>
               <button onClick={handleLogOut}>Logout</button>

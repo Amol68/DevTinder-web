@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 import axios from "axios";
 import { baseUrl } from "../utils/constants";
@@ -7,15 +7,15 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
 const EditProfile = ({ user }) => {
-  console.log({ user });
-  const [firstName, setFirstName] = useState(user?.firstName);
-  const [lastName, setLastName] = useState(user?.lastName);
+  
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
   const [gender, setGender] = useState("");
   const [age, setAge] = useState(null);
-  const [about, setAbout] = useState(user.about);
-  const [photoUrl, setPhotourl] = useState(user.photoUrl);
+  const [about, setAbout] = useState();
+  const [photoUrl, setPhotourl] = useState();
   const [error, setError] = useState("");
-  console.log({ error });
+
   const dispatch = useDispatch();
   const handleEdit = async () => {
     try {
@@ -38,8 +38,20 @@ const EditProfile = ({ user }) => {
     }
   };
 
+
+   useEffect(() => {
+    if (user) {
+      setFirstName(user.firstName || "");
+      setLastName(user.lastName || "");
+      setGender(user.gender || "");
+      setAge(user.age || "");
+      setAbout(user.about || "");
+      setPhotourl(user.photoUrl || "");
+    }
+  }, [user]);
+
   return (
-    <div className=" flex flex-col lg:flex-row   justify-center items-center gap-x-5 sm:gap-y-5 md:gap-y-5 my-5 p-5 py-8">
+    <div className=" flex flex-col lg:flex-row border md:items-center  justify-center items-start gap-x-10 sm:gap-y-5 md:gap-y-5 my-5 p-5 py-8">
       <div className="card card-dash bg-base-300 w-96  ">
         <div className="card-body">
           <h2 className="card-title justify-center">Edit Profile</h2>
