@@ -7,6 +7,8 @@ import { deleteFeed } from "../utils/feedSlice";
 import defaultUser from "../assets/images/defaultUser.jpeg";
 const Navbar = () => {
   const user = useSelector((store) => store.user);
+
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

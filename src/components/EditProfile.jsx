@@ -5,6 +5,7 @@ import axios from "axios";
 import { baseUrl } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = ({ user }) => {
   
@@ -15,6 +16,8 @@ const EditProfile = ({ user }) => {
   const [about, setAbout] = useState();
   const [photoUrl, setPhotourl] = useState();
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const handleEdit = async () => {
@@ -33,6 +36,8 @@ const EditProfile = ({ user }) => {
       );
 
       dispatch(addUser(res?.data));
+      navigate("/feed");
+      
     } catch (err) {
       setError(err);
     }
@@ -44,14 +49,14 @@ const EditProfile = ({ user }) => {
       setFirstName(user.firstName || "");
       setLastName(user.lastName || "");
       setGender(user.gender || "");
-      setAge(user.age || "");
+      setAge(user.age ||null);
       setAbout(user.about || "");
       setPhotourl(user.photoUrl || "");
     }
   }, [user]);
 
   return (
-    <div className=" flex flex-col lg:flex-row border md:items-center  justify-center items-start gap-x-10 sm:gap-y-5 md:gap-y-5 my-5 p-5 py-8">
+    <div className=" flex flex-col lg:flex-row  justify-center items-start gap-x-10 sm:gap-y-5 md:gap-y-5 my-5 p-5 py-8">
       <div className="card card-dash bg-base-300 w-96  ">
         <div className="card-body">
           <h2 className="card-title justify-center">Edit Profile</h2>

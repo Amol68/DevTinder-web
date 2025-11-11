@@ -7,7 +7,7 @@ import UserCard from "./UserCard";
 
 const Feed = () => {
   const feed = useSelector((state) => state.feed);
-
+  console.log({ feed });
   const dispatch = useDispatch();
 
   const getFeed = async () => {
@@ -28,12 +28,12 @@ const Feed = () => {
     getFeed();
   }, []);
 
+  if (!feed.length) return <h3>No Devs Found</h3>;
+
   return (
-    feed && (
-      <div className="flex justify-center my-5">
-        {/* <UserCard user={feed[13]} /> */}
-      </div>
-    )
+    <div className="flex flex-col justify-center items-center gap-2 py-2">
+      {feed.length && <UserCard user={feed[2]} />}
+    </div>
   );
 };
 

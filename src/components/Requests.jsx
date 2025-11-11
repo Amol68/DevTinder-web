@@ -1,18 +1,32 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect } from "react";
 import { baseUrl } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests } from "../utils/requestSlice";
+import { addRequests, removeRequest } from "../utils/requestSlice";
 import defaultUser from "../assets/images/defaultUser.jpeg";
 
 const Requests = () => {
   const dispatch = useDispatch();
-  const requests = useSelector((store) => store.requests);
+  const requests = useSelector((store) => store.requests) || [];
+  console.log("request component", requests);
+  const reviewRequest = async (status, _id) => {
+    try {
+      console.log("function called");
 
-  console.log({ requests });
+      const res = await axios.post(
+        baseUrl + "/request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
+      );
+      console.log({ res });
+      dispatch(removeRequest(_id))
+    } catch (err) {
+      console.log({ err });
+    }
+  };
+
   const fetchRequests = async () => {
-    console.log("fetch requests called");
+   
     try {
       const res = await axios.get(baseUrl + "/user/requests/received", {
         withCredentials: true,
@@ -25,35 +39,47 @@ const Requests = () => {
   };
 
   useEffect(() => {
+    console.log("useeffect triggered");
     fetchRequests();
   }, []);
 
   return (
     <div className="flex justify-center items-center">
       <div className="flex flex-col justify-center my-10 gap-1">
-        {requests.map((request) => {
-          const { firstName, lastName, photoUrl, about } = request.fromUserID;
-          console.log("logs", { firstName, lastName, photoUrl, about });
-          return (
-            <div
-              key={request._id}
-              className="flex  gap-x-5 items-center border"
-            >
-              <img
-                src={photoUrl || defaultUser}
-                className="rounded-full size-20"
-              />
+        {Object.keys(requests).length !== 0 &&
+          requests.map((request) => {
+            const { firstName, lastName, photoUrl, about } = request.fromUserID;
+            console.log("logs", { firstName, lastName, photoUrl, about });
+            return (
+              <div
+                key={request._id}
+                className="flex  gap-x-5 items-center border"
+              >
+                <img
+                  src={photoUrl || defaultUser}
+                  className="rounded-full size-20"
+                />
 
-              <div>
-                <h3>{firstName + " " + lastName}</h3>
-                <p>{about}</p>
+                <div>
+                  <h3>{firstName + " " + lastName}</h3>
+                  <p>{about}</p>
+                </div>
+
+                <button
+                  className="btn btn-primary"
+                  onClick={() => reviewRequest("accepted", request._id)}
+                >
+                  Accept
+                </button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => reviewRequest("rejected", request._id)}
+                >
+                  Reject
+                </button>
               </div>
-
-              <button className="btn btn-primary">Accept</button>
-              <button className="btn btn-secondary">Reject</button>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </div>
   );
