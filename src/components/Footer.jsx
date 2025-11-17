@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
- <footer className="fixed w-full bottom-0.5 bg-neutral text-neutral-content gap-2 flex flex-col md:flex-row justify-center md:justify-between p-4  ">
+ <footer className=" w-full fixed bottom-0.5 bg-neutral text-neutral-content gap-2 flex flex-col md:flex-row justify-center md:justify-between p-4  ">
   <aside className="">
     
     <p className='place-self-center'>Copyright © {new Date().getFullYear()} - All right reserved</p>
