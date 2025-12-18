@@ -1,38 +1,54 @@
-import React from 'react'
+import React from "react";
 
-const ConnectionCard = () => {
-
+const ConnectionCard = ({ firstName, lastName, about, age, gender, photoUrl }) => {
   return (
-    <div className='flex border border-gray-500 rounded-2xl  max-w-md px-3 py-1 items-start'>
-
-  {/* info */}
-  <div className='flex flex-col max-w-60'>
-    
-  
-   <h3 className='font-bold'>Xavi Simons</h3>
-   <span>Xavi Simons is a Dutch professional footballer  for Premier League club Tottenham Hotspur and the Netherlands national team</span>
-
-
-  <div className="flex justify gap-4 text-xs text-gray mt-3 ">
-     <span>Male</span>
-    <span className=" ">25 Years</span>
-    <span className="">Female</span>
-  </div>
-
-  </div>
-
-  {/* profile pic */}
-
-     <div className="w-24 h-36 rounded-4xl overflow-hidden border-2 border-gray-500 mb-3">
+    <div
+      className="
+      flex flex-col sm:flex-row 
+      border border-gray-600 bg-[#1f1f1f] 
+      rounded-2xl shadow-lg p-4 sm:p-5 
+      max-w-xl w-full gap-4
+      hover:bg-[#242424] transition-all duration-200
+    "
+    >
+      {/* Profile Pic */}
+      <div className="w-full sm:w-28 h-36 rounded-xl overflow-hidden shadow-md mx-auto sm:mx-0">
         <img
-          src={"https://assets-fr.imgfoot.com/media/cache/1200x1200/xavi-simons-2122-62c2afb7de1bb.jpg"}
+          src={photoUrl}
           alt="Profile"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
       </div>
 
-    </div>
-  )
-}
+      {/* Info */}
+      <div className="flex flex-col text-gray-200 w-full">
+        <h3 className="text-lg font-semibold mb-1">
+          {firstName} {lastName}
+        </h3>
 
-export default ConnectionCard
+        <p className="text-sm text-gray-400 leading-5">{about}</p>
+
+        {/* Chips */}
+        <div className="flex flex-wrap gap-2 mt-3">
+          {gender && (
+            <span className="px-3 py-1 rounded-full text-xs bg-gray-700 text-gray-300">
+              {gender}
+            </span>
+          )}
+
+          {age && (
+            <span className="px-3 py-1 rounded-full text-xs bg-gray-700 text-gray-300">
+              {age} Years
+            </span>
+          )}
+
+          <span className="px-3 py-1 rounded-full text-xs bg-gray-700 text-gray-300">
+            Connected
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ConnectionCard;

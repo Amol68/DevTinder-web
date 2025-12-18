@@ -2,29 +2,15 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { baseUrl } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests, removeRequest } from "../utils/requestSlice";
-import defaultUser from "../assets/images/defaultUser.jpeg";
+import { addRequests } from "../utils/requestSlice";
+
+import RequestCard from "./RequestCard";
 
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store.requests) || [];
-  console.log("request component", requests);
-  const reviewRequest = async (status, _id) => {
-    try {
-      console.log("function called");
-
-      const res = await axios.post(
-        baseUrl + "/request/review/" + status + "/" + _id,
-        {},
-        { withCredentials: true }
-      );
-      console.log({ res });
-      dispatch(removeRequest(_id))
-    } catch (err) {
-      console.log({ err });
-    }
-  };
-
+ 
+  
   const fetchRequests = async () => {
    
     try {
@@ -39,49 +25,30 @@ const Requests = () => {
   };
 
   useEffect(() => {
-    console.log("useeffect triggered");
+   
     fetchRequests();
   }, []);
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="flex flex-col justify-center my-10 gap-1">
-        {Object.keys(requests).length !== 0 &&
-          requests.map((request) => {
-            const { firstName, lastName, photoUrl, about } = request.fromUserID;
-            console.log("logs", { firstName, lastName, photoUrl, about });
-            return (
-              <div
-                key={request._id}
-                className="flex  gap-x-5 items-center border"
-              >
-                <img
-                  src={photoUrl || defaultUser}
-                  className="rounded-full size-20"
-                />
+    <div className="flex justify-center items-center w-full">
+  <div className="flex flex-col my-10 gap-4 w-[90%] max-w-4xl ">
 
-                <div>
-                  <h3>{firstName + " " + lastName}</h3>
-                  <p>{about}</p>
-                </div>
+    {requests.length > 0 &&
+      requests.map((request) => {
+     
 
-                <button
-                  className="btn btn-primary"
-                  onClick={() => reviewRequest("accepted", request._id)}
-                >
-                  Accept
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => reviewRequest("rejected", request._id)}
-                >
-                  Reject
-                </button>
-              </div>
-            );
-          })}
-      </div>
-    </div>
+        return (
+          <div
+            key={request._id}
+            className="flex items-center gap-4 p-4 rounded-xl border border-gray-700 bg-[#1f1f26] shadow-sm"
+          >
+            <RequestCard request={request}/>
+          </div>
+        );
+      })}
+  </div>
+</div>
+
   );
 };
 

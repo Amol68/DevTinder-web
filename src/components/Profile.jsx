@@ -164,7 +164,7 @@ const Profile = () => {
 
     {/*  User Card Section */}
     <div className="flex-1 flex justify-center md:justify-start ">
-      <UserCard user={{ firstName, lastName, gender, age, about, photoUrl }}  />
+      <UserCard user={{ firstName, lastName, gender, age, about, photoUrl }} isProfile={true} className={"h-fit"}  />
     </div>
   </div>
 </div>

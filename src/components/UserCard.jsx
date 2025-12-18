@@ -5,7 +5,7 @@ import axios from "axios";
 import { baseUrl } from "../utils/constants";
 import { removeUser } from "../utils/feedSlice";
 import { useDispatch } from "react-redux";
-const UserCard = ({ user,className }) => {
+const UserCard = ({ user,className,isProfile }) => {
   const {
     firstName = "",
     lastName = "",
@@ -59,7 +59,7 @@ const UserCard = ({ user,className }) => {
   </div>
 
   {/* Buttons */}
-  <div className="flex justify-center gap-3 mt-4 w-full">
+  <div className={` ${isProfile?"hidden":"flex"} justify-center gap-3 mt-4 w-full`}>
     <button
       onClick={() => handleRequest("ignored", _id)}
       className="btn btn-secondary w-28"
