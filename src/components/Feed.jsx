@@ -13,7 +13,7 @@ const Feed = () => {
   const getFeed = async () => {
     try {
       if (Object.keys(feed).length === 0) {
-        const userFeed = await axios.get(baseUrl + "/user/feed", {
+        const userFeed = await axios.get(baseUrl + "/feed", {
           withCredentials: true,
         });
 
