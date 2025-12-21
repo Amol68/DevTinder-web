@@ -32,7 +32,7 @@ const Profile = () => {
     const handleEdit = async () => {
     try {
       const res = await axios.patch(
-        baseUrl + "/profile/edit",
+        baseUrl + "/edit",
         {
           firstName,
           lastName,

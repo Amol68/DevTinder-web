@@ -12,7 +12,7 @@ const RequestCard = ({request}) => {
     try {
      
       const res = await axios.post(
-        baseUrl + "/request/review/" + status + "/" + _id,
+        baseUrl + "/review/" + status + "/" + _id,
         {},
         { withCredentials: true }
       );

@@ -15,7 +15,7 @@ const Body = () => {
 
   const fetchUser = async () => {
     try {
-      const user = await axios.get(baseUrl + "/profile/view", {
+      const user = await axios.get(baseUrl + "/view", {
         withCredentials: true,
       });
 
