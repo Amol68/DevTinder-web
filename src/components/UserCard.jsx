@@ -21,7 +21,7 @@ const UserCard = ({ user,className,isProfile }) => {
   const handleRequest = (status, userID) => {
     try {
       const res = axios.post(
-        baseUrl + "/request/send/" + status.trim() + "/" + userID,
+        baseUrl + "/send/" + status.trim() + "/" + userID,
         {},
         { withCredentials: true }
       );
