@@ -18,8 +18,12 @@ const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log({ formError });
-  const handleLogin = async () => {
+
+
+
+  const handleLogin = async (e) => {
+
+  
     try {
       const res = await axios.post(
         baseUrl + "/login",
@@ -164,6 +168,7 @@ const Login = () => {
    {/* login/signup button */}
             <div className="card-actions w-full px-1">
               <button
+              type="button"
                 className="btn btn-secondary  border w-full"
                 onClick={isLogin ? handleLogin : handleSignUp}
               >
@@ -174,6 +179,7 @@ const Login = () => {
            <DividerWithText isLogin={isLogin}/>
 
             <button
+type="button"
               onClick={() => setIsLogin((value) => !value)}
               className="cursor-pointer w-full border  border-gray-500 rounded-lg py-2 hover:btn hover:btn-secondary "
             >
