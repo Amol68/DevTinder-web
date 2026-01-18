@@ -1,15 +1,18 @@
 import axios from "axios";
 import { Check } from "lucide-react";
 import { baseUrl } from "../utils/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Premium = () => {
 
   const [isPremium,setIsPremium] = useState(false);
+  useEffect(()=>{
+   verifyPremiumUser()
+  },[])
 
   const verifyPremiumUser = async () => {
 
-     const res = await axios.get(baseUrl + "/premium/verfy", {
+     const res = await axios.get(baseUrl + "/payment/premium/verify", {
           withCredentials: true,
         });
 
@@ -51,8 +54,7 @@ const Premium = () => {
       rzp.open();
 
   }
-  
-  console.log({isPremium})
+   
 
   return (
     <div className="min-h-screen bg-base-200    flex items-center justify-center p-4">
