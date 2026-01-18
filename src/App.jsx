@@ -11,6 +11,7 @@ import Terms from "./pages/Terms";
 import Refund from "./pages/Refund";
 import Privacy from "./pages/Privacy";
 import Shipping from "./pages/Shipping";
+import Premium from "./components/Premium";
 function App() {
   return (
     <Provider store={store}>
@@ -23,9 +24,9 @@ function App() {
             <Route path="/requests" element={<Requests />} />
             <Route path="/connections" element={<Connections />} />
             <Route path="/privacy-policy" element={<Privacy />} />
+            <Route path="/premium" element={<Premium />} />
 <Route path="/terms-and-conditions" element={<Terms />} />
 <Route path="/refund-policy" element={<Refund />} />
-
 <Route path="/shipping-policy" element={<Shipping />} />
           </Route>
         </Routes>

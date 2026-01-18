@@ -170,7 +170,7 @@ const Login = () => {
               <button
               type="button"
                 className="btn btn-secondary  border w-full"
-                onClick={isLogin ? handleLogin : handleSignUp}
+                onClick={isLogin ? ()=> handleLogin() : ()=>handleSignUp()}
               >
                 {isLogin ? "Login" : "Sign Up"}
               </button>
