@@ -1,32 +1,42 @@
 import axios from "axios";
 import { Check } from "lucide-react";
 import { baseUrl } from "../utils/constants";
+import { useState } from "react";
 
 const Premium = () => {
 
+  const [isPremium,setIsPremium] = useState(false);
 
+  const verifyPremiumUser = async () => {
+
+     const res = await axios.get(baseUrl + "/premium/verfy", {
+          withCredentials: true,
+        });
+
+    res?.data?.isPremium ? setIsPremium(true) : null;
+
+
+  }
 
   const handleBuyClick = async (type) => {
   
-
     const order = await  axios.post(baseUrl + "/payment/create",{
         membershipType:type
     },{
       withCredentials:true
     })
     
-
     const {amount, currency,orderId,notes} = order?.data?._doc ?? {}
   
     const options = {
-        key: 'rzp_test_S2AMT31DMYyUXO', // Replace with your Razorpay key_id
-        amount: amount, // Amount is in currency subunits.
+        key: 'rzp_test_S2AMT31DMYyUXO', 
+        amount: amount,
         currency: currency,
          name: "DumBle",
          description:"Bumble for nerds",
        
-        order_id:orderId, // This is the order_id created in the backend
-        callback_url: '', // Your success URL
+        order_id:orderId, 
+        callback_url: '', 
         prefill: {
           name: `${notes?.firstName} ${notes.lastName}`,
          
@@ -35,17 +45,24 @@ const Premium = () => {
         theme: {
           color: '#F37254'
         },
+      handler:verifyPremiumUser,
       };
    const rzp = new window.Razorpay(options);
       rzp.open();
 
   }
+  
+  console.log({isPremium})
 
   return (
     <div className="min-h-screen bg-base-200    flex items-center justify-center p-4">
       <div className="max-w-5xl w-full">
         
-        {/* Header */}
+        
+       {
+        isPremium ? <h3>You Are Already a Premium User</h3> : <>
+        
+           {/* Header */}
         <div className="text-center mb-10 ">
           <h1 className="text-3xl font-bold">Upgrade to Premium</h1>
           <p className="text-gray-400 mt-2">
@@ -136,6 +153,8 @@ const Premium = () => {
         <p className="text-center text-xs text-gray-400 mt-8">
           Payments are secure and processed via Razorpay
         </p>
+        </>
+       }
       </div>
     </div>
   );
