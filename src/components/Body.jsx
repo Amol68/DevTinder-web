@@ -31,10 +31,12 @@ const Body = () => {
   }, []);
 
   return (
-    <div className=" overflow-y-auto h-screen ">
+    <div className=" flex flex-col min-h-screen">
       <Navbar />
-      <Outlet />
-      <Footer />
+        <main className="grow">
+        <Outlet />
+      </main>
+      {/* <Footer /> */}
     </div>
   );
 };

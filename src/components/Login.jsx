@@ -70,11 +70,11 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center my-2  px-5">
+   <div className="flex items-center justify-center min-h-[70vh]">
 
 
-      <div className="card card-dash bg-base-300 w-96 h-auto  ">
-        <div className="card-body flex flex-col gap-6 ">
+      <div className="card card-dash bg-base-300 w-96  ">
+        <div className="card-body flex flex-col gap-6  ">
 
 
           {/* login title */}

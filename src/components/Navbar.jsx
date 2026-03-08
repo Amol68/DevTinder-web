@@ -33,7 +33,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div
-        className={`  ${Object.keys(user).length === 0 ? "hidden" : "block"}`}
+        className={`  ${Object.keys(user)?.length === 0 || !user ? "hidden" : "block"}`}
       >
         <div className="dropdown flex  justify-center items-center">
           <div>Welcome {user.firstName || "User"}</div>
