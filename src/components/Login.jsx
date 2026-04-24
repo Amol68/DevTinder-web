@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../utils/constants";
 import DividerWithText from "./DividerText";
 
-import { Mail,Lock,TextQuote } from 'lucide-react';
+import { Mail, Lock, TextQuote, Sparkles } from "lucide-react";
 
 const Login = () => {
   const [firstName, setFirstName] = useState("");
@@ -19,11 +19,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-
   const handleLogin = async (e) => {
-
-  
     try {
       const res = await axios.post(
         baseUrl + "/login",
@@ -33,7 +29,7 @@ const Login = () => {
         },
         {
           withCredentials: true,
-        }
+        },
       );
 
       dispatch(addUser(res?.data?.data));
@@ -56,134 +52,136 @@ const Login = () => {
           email,
           password,
         },
-        
+
         {
           withCredentials: true,
-        }
+        },
       );
 
       dispatch(addUser(res?.data?.data));
-      navigate("/profile")
+      navigate("/profile");
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-   <div className="flex items-center justify-center min-h-[70vh]">
-
-
+    <div className="w-full  max-w-[1200px] bg-background mx-auto px-4 sm:px-6 lg:px-8 border grid grid-cols-1 md:grid-cols-2 ">
+      {/* login form */}
       <div className="card card-dash bg-base-300 w-96  ">
         <div className="card-body flex flex-col gap-6  ">
-
-
           {/* login title */}
           <div className="flex flex-col gap-y-1 ">
-            <span className="font-bold text-xl tracking-wide">Welcome Back</span>
-           <span className=" text-gray-300">{isLogin ? "Sign in to continue your journey" : "Sign Up to start your journey"}</span> 
+            <span className="font-bold text-xl tracking-wide">
+              Welcome Back
+            </span>
+            <span className=" text-gray-300">
+              {isLogin
+                ? "Sign in to continue your journey"
+                : "Sign Up to start your journey"}
+            </span>
           </div>
 
           <div className="flex flex-col justify-center items-center gap-y-8 ">
+            {/* input fields */}
+            <div className="flex flex-col justify-start items-center gap-y-1 w-full">
+              {!isLogin && (
+                <>
+                  <div className="w-full">
+                    <fieldset className="fieldset">
+                      <label className="flex gap-1 items-center pl-1">
+                        <TextQuote size={15} />
+                        <span>FirstName</span>
+                      </label>
 
-          {/* input fields */}
-          <div className="flex flex-col justify-start items-center gap-y-1 w-full">
-                {!isLogin && (
-              <>
-                <div className="w-full">
-                  <fieldset className="fieldset">
-                    <label className="flex gap-1 items-center pl-1">
-                   <TextQuote size={15}/>
-                   <span>FirstName</span>
-                </label>
-               
-                    <input
-                      type="text"
-                      className="input outline-0"
-                      value={firstName}
-                      placeholder="Type here"
-                      onChange={(e) => {
-                        setFirstName(e.target.value);
-                      }}
-                    />
-                  </fieldset>
-                </div>
+                      <input
+                        type="text"
+                        className="input outline-0"
+                        value={firstName}
+                        placeholder="Type here"
+                        onChange={(e) => {
+                          setFirstName(e.target.value);
+                        }}
+                      />
+                    </fieldset>
+                  </div>
 
-                <div className="w-full">
-                  <fieldset className="fieldset">
-                   <label className="flex gap-1 items-center pl-1">
-                   <TextQuote size={15}/>
-                   <span>LastName</span>
-                </label> <input
-                      type="text"
-                      className="input outline-0"
-                      value={lastName}
-                      placeholder="Type here"
-                      onChange={(e) => {
-                        setLastName(e.target.value);
-                      }}
-                    />
-                  </fieldset>
-                </div>
-              </>
-            )}
+                  <div className="w-full">
+                    <fieldset className="fieldset">
+                      <label className="flex gap-1 items-center pl-1">
+                        <TextQuote size={15} />
+                        <span>LastName</span>
+                      </label>{" "}
+                      <input
+                        type="text"
+                        className="input outline-0"
+                        value={lastName}
+                        placeholder="Type here"
+                        onChange={(e) => {
+                          setLastName(e.target.value);
+                        }}
+                      />
+                    </fieldset>
+                  </div>
+                </>
+              )}
 
-            {/* email Id */}
-            <div className=" w-full">
-              <fieldset className="fieldset">
-                <label className="flex gap-1 items-center pl-1">
-                   <Mail size={15}/>
-                   <span>Email</span>
-                </label>
-                <input
-                  type="email"
-                  className="input  outline-0"
-                  value={email}
-                  placeholder="Type here"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </fieldset>
+              {/* email Id */}
+              <div className=" w-full">
+                <fieldset className="fieldset">
+                  <label className="flex gap-1 items-center pl-1">
+                    <Mail size={15} />
+                    <span>Email</span>
+                  </label>
+                  <input
+                    type="email"
+                    className="input  outline-0"
+                    value={email}
+                    placeholder="Type here"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </fieldset>
+              </div>
+
+              {/* password */}
+              <div className="w-full">
+                <fieldset className="fieldset">
+                  <label className="flex gap-1 items-center pl-1">
+                    <Lock size={15} />
+                    <span>Password</span>
+                  </label>{" "}
+                  <input
+                    type="text"
+                    className="input outline-0"
+                    value={password}
+                    placeholder="Type here"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </fieldset>
+              </div>
             </div>
 
-            {/* password */}
-            <div className="w-full">
-              <fieldset className="fieldset">
-                 <label className="flex gap-1 items-center pl-1">
-                   <Lock size={15}/>
-                   <span>Password</span>
-                </label> <input
-                  type="text"
-                  className="input outline-0"
-                  value={password}
-                  placeholder="Type here"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                />
-              </fieldset>
-            </div>
-
-          </div>
-
-
-   {/* login/signup button */}
+            {/* login/signup button */}
             <div className="card-actions w-full px-1">
               <button
-              type="button"
+                type="button"
                 className="btn btn-secondary  border w-full"
-                onClick={isLogin ? ()=> handleLogin() : ()=>handleSignUp()}
+                onClick={isLogin ? () => handleLogin() : () => handleSignUp()}
               >
                 {isLogin ? "Login" : "Sign Up"}
               </button>
             </div>
-           
-           <DividerWithText isLogin={isLogin}/>
+
+            <DividerWithText isLogin={isLogin} />
 
             <button
-type="button"
+              type="button"
               onClick={() => setIsLogin((value) => !value)}
               className="cursor-pointer w-full border  border-gray-500 rounded-lg py-2 hover:btn hover:btn-secondary "
             >
-          {isLogin?"Sign In":"Login"}
+              {isLogin ? "Sign In" : "Login"}
             </button>
 
             {/* {formError.length > 0 ? (
@@ -194,7 +192,21 @@ type="button"
           </div>
         </div>
       </div>
-    </div>
+
+      {/* cards */}
+      <div className="hidden lg:flex flex-1 relative overflow-hidden border-l border-border">
+        <div className="absolute inset-0 grid-bg" />
+        <div
+          className="absolute -top-20 -left-20 w-[500px] h-[500px] opacity-60 blur-3xl"
+          style={{ background: "var(--gradient-violet)" }}
+        />
+        <div
+          className="absolute bottom-0 right-0 w-[500px] h-[500px] opacity-50 blur-3xl"
+          style={{ background: "var(--gradient-pink)" }}
+        />
+
+      </div>
+      </div>
   );
 };
 

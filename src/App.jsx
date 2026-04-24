@@ -27,9 +27,9 @@ function App() {
             <Route path="/privacy-policy" element={<Privacy />} />
             <Route path="/premium" element={<Premium />} />
             <Route path="/chat/:targetUserId" element={<Chat />} />
-<Route path="/terms-and-conditions" element={<Terms />} />
-<Route path="/refund-policy" element={<Refund />} />
-<Route path="/shipping-policy" element={<Shipping />} />
+            <Route path="/terms-and-conditions" element={<Terms />} />
+            <Route path="/refund-policy" element={<Refund />} />
+            <Route path="/shipping-policy" element={<Shipping />} />
           </Route>
         </Routes>
       </BrowserRouter>

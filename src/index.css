@@ -1,4 +1,49 @@
 @import "tailwindcss";
-@plugin "daisyui"{
-   themes: dracula --default
+@source "../src";
+
+@plugin "daisyui" {
+  themes: dracula --default;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+@theme {
+  --radius: 1rem;
+
+  --color-background: oklch(0.18 0.025 280);
+  --color-foreground: oklch(0.97 0.01 280);
+
+  --card: oklch(0.23 0.03 280);
+  --card-foreground: oklch(0.97 0.01 280);
+  --popover: oklch(0.23 0.03 280);
+  --popover-foreground: oklch(0.97 0.01 280);
+
+  --primary: oklch(0.78 0.15 305);
+  --primary-foreground: oklch(0.2 0.04 290);
+
+  --secondary: oklch(0.27 0.035 280);
+  --secondary-foreground: oklch(0.97 0.01 280);
+
+  --muted: oklch(0.25 0.03 280);
+  --muted-foreground: oklch(0.7 0.02 280);
+
+  --accent: oklch(0.75 0.18 350);
+  --accent-foreground: oklch(0.98 0.01 350);
+
+  --destructive: oklch(0.65 0.25 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+
+  --border: oklch(1 0 0 / 0.08);
+  --input: oklch(1 0 0 / 0.08);
+  --ring: oklch(0.78 0.15 305);
+
+  --violet: oklch(0.78 0.15 305);
+  --pink: oklch(0.75 0.18 350);
 }
