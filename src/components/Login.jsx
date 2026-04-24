@@ -66,147 +66,157 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full  max-w-[1200px] bg-background mx-auto px-4 sm:px-6 lg:px-8 border grid grid-cols-1 md:grid-cols-2 ">
-      {/* login form */}
-      <div className="card card-dash bg-base-300 w-96  ">
-        <div className="card-body flex flex-col gap-6  ">
-          {/* login title */}
-          <div className="flex flex-col gap-y-1 ">
-            <span className="font-bold text-xl tracking-wide">
-              Welcome Back
-            </span>
-            <span className=" text-gray-300">
-              {isLogin
-                ? "Sign in to continue your journey"
-                : "Sign Up to start your journey"}
-            </span>
-          </div>
+    <div className="w-full overflow-hidden min-h-screen max-w-[1200px]   mx-auto p-4   ">
+      <div className="flex ">
+        {/* login form */}
+        <div className="flex flex-col w-full lg:w-[55%]  px-6 sm:px-10 lg:px-16 py-4 ">
+          <div className="card card-dash   max-w-[420px]  ">
+            <div className="card-body flex flex-col gap-6  ">
+              {/* login title */}
+              <div className="flex flex-col gap-y-1 ">
+                <span className="font-bold text-xl tracking-wide">
+                  Welcome Back
+                </span>
+                <span className=" text-gray-300">
+                  {isLogin
+                    ? "Sign in to continue your journey"
+                    : "Sign Up to start your journey"}
+                </span>
+              </div>
 
-          <div className="flex flex-col justify-center items-center gap-y-8 ">
-            {/* input fields */}
-            <div className="flex flex-col justify-start items-center gap-y-1 w-full">
-              {!isLogin && (
-                <>
-                  <div className="w-full">
-                    <fieldset className="fieldset">
+              <div className="flex flex-col justify-center items-center gap-y-8 ">
+                {/* input fields */}
+                <div className="flex flex-col justify-start items-center gap-y-1 w-full">
+                  {!isLogin && (
+                    <>
+                      <div className="w-full">
+                        <fieldset className="fieldset">
+                          <label className="flex gap-1 items-center pl-1">
+                            <TextQuote size={15} />
+                            <span>FirstName</span>
+                          </label>
+
+                          <input
+                            type="text"
+                            className="input outline-0"
+                            value={firstName}
+                            placeholder="Type here"
+                            onChange={(e) => {
+                              setFirstName(e.target.value);
+                            }}
+                          />
+                        </fieldset>
+                      </div>
+
+                      <div className="w-full">
+                        <fieldset className="fieldset">
+                          <label className="flex gap-1 items-center pl-1">
+                            <TextQuote size={15} />
+                            <span>LastName</span>
+                          </label>{" "}
+                          <input
+                            type="text"
+                            className="input outline-0"
+                            value={lastName}
+                            placeholder="Type here"
+                            onChange={(e) => {
+                              setLastName(e.target.value);
+                            }}
+                          />
+                        </fieldset>
+                      </div>
+                    </>
+                  )}
+
+                  {/* email Id */}
+                  <div className=" w-full ">
+                    <fieldset className="fieldset w-full ">
                       <label className="flex gap-1 items-center pl-1">
-                        <TextQuote size={15} />
-                        <span>FirstName</span>
+                        <Mail size={15} />
+                        <span>Email</span>
                       </label>
-
                       <input
-                        type="text"
-                        className="input outline-0"
-                        value={firstName}
+                        type="email"
+                        className="input w-full outline-0"
+                        value={email}
                         placeholder="Type here"
-                        onChange={(e) => {
-                          setFirstName(e.target.value);
-                        }}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </fieldset>
                   </div>
 
+                  {/* password */}
                   <div className="w-full">
-                    <fieldset className="fieldset">
+                    <fieldset className="fieldset w-full">
                       <label className="flex gap-1 items-center pl-1">
-                        <TextQuote size={15} />
-                        <span>LastName</span>
+                        <Lock size={15} />
+                        <span>Password</span>
                       </label>{" "}
                       <input
                         type="text"
-                        className="input outline-0"
-                        value={lastName}
+                        className="input outline-0 w-full"
+                        value={password}
                         placeholder="Type here"
                         onChange={(e) => {
-                          setLastName(e.target.value);
+                          setPassword(e.target.value);
                         }}
                       />
                     </fieldset>
                   </div>
-                </>
-              )}
+                </div>
 
-              {/* email Id */}
-              <div className=" w-full">
-                <fieldset className="fieldset">
-                  <label className="flex gap-1 items-center pl-1">
-                    <Mail size={15} />
-                    <span>Email</span>
-                  </label>
-                  <input
-                    type="email"
-                    className="input  outline-0"
-                    value={email}
-                    placeholder="Type here"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </fieldset>
-              </div>
+                {/* login/signup button */}
+                <div className="card-actions w-full  px-1">
+                  <button
+                    type="button"
+                    className="btn btn-secondary   w-full"
+                    onClick={
+                      isLogin ? () => handleLogin() : () => handleSignUp()
+                    }
+                  >
+                    {isLogin ? "Login" : "Sign Up"}
+                  </button>
+                </div>
 
-              {/* password */}
-              <div className="w-full">
-                <fieldset className="fieldset">
-                  <label className="flex gap-1 items-center pl-1">
-                    <Lock size={15} />
-                    <span>Password</span>
-                  </label>{" "}
-                  <input
-                    type="text"
-                    className="input outline-0"
-                    value={password}
-                    placeholder="Type here"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  />
-                </fieldset>
-              </div>
-            </div>
+                <DividerWithText isLogin={isLogin} />
 
-            {/* login/signup button */}
-            <div className="card-actions w-full px-1">
-              <button
-                type="button"
-                className="btn btn-secondary  border w-full"
-                onClick={isLogin ? () => handleLogin() : () => handleSignUp()}
-              >
-                {isLogin ? "Login" : "Sign Up"}
-              </button>
-            </div>
+                <button
+                  type="button"
+                  onClick={() => setIsLogin((value) => !value)}
+                  className="cursor-pointer w-full border  border-gray-500 rounded-lg py-2 hover:btn hover:btn-secondary "
+                >
+                  {isLogin ? "Sign In" : "Login"}
+                </button>
 
-            <DividerWithText isLogin={isLogin} />
-
-            <button
-              type="button"
-              onClick={() => setIsLogin((value) => !value)}
-              className="cursor-pointer w-full border  border-gray-500 rounded-lg py-2 hover:btn hover:btn-secondary "
-            >
-              {isLogin ? "Sign In" : "Login"}
-            </button>
-
-            {/* {formError.length > 0 ? (
+                {/* {formError.length > 0 ? (
               <p className="text-red-600 ">{formError}</p>
             ) : (
               <></>
             )} */}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* cards */}
-      <div className="hidden lg:flex flex-1 relative overflow-hidden border-l border-border">
-        <div className="absolute inset-0 grid-bg" />
+        {/* cards */}
         <div
-          className="absolute -top-20 -left-20 w-[500px] h-[500px] opacity-60 blur-3xl"
-          style={{ background: "var(--gradient-violet)" }}
-        />
-        <div
-          className="absolute bottom-0 right-0 w-[500px] h-[500px] opacity-50 blur-3xl"
-          style={{ background: "var(--gradient-pink)" }}
-        />
-
+          className="hidden lg:flex flex-1 relative "
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.03)",
+            backgroundImage: `
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
+    `,
+            backgroundSize: "40px 40px",
+            backdropFilter: "blur(12px)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.06)",
+          }}
+        >
+          {/* gradient overlays */}
+          <div className="absolute -top-20 -left-20 w-[200px] bg-primary-foreground h-[200px] opacity-60 blur-3xl" />
+        </div>
       </div>
-      </div>
+    </div>
   );
 };
 

@@ -22,7 +22,6 @@ const Body = () => {
       dispatch(addUser(user.data));
     } catch (err) {
       navigate("/login");
-     
     }
   };
 
@@ -31,9 +30,9 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full min-h-screen overflow-x-hidden bg-background">
       <Navbar />
-        <main className="w-full mt-5 max-sm:mt-0">
+      <main className="w-full max-sm:mt-0 w-[calc(100%-60px)] ">
         <Outlet />
       </main>
       {/* <Footer /> */}

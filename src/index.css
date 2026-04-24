@@ -20,12 +20,18 @@ body {
   --color-background: oklch(0.18 0.025 280);
   --color-foreground: oklch(0.97 0.01 280);
 
+    --color-gradient-violet: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--violet) 60%, transparent) 0%,
+    transparent 70%
+  );
+
   --card: oklch(0.23 0.03 280);
   --card-foreground: oklch(0.97 0.01 280);
   --popover: oklch(0.23 0.03 280);
   --popover-foreground: oklch(0.97 0.01 280);
 
-  --primary: oklch(0.78 0.15 305);
+  --color-primary: oklch(0.78 0.15 305);
   --primary-foreground: oklch(0.2 0.04 290);
 
   --secondary: oklch(0.27 0.035 280);
@@ -46,4 +52,6 @@ body {
 
   --violet: oklch(0.78 0.15 305);
   --pink: oklch(0.75 0.18 350);
+
+ 
 }
