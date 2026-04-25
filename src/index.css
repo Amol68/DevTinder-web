@@ -20,7 +20,7 @@ body {
   --color-background: oklch(0.18 0.025 280);
   --color-foreground: oklch(0.97 0.01 280);
 
-    --color-gradient-violet: radial-gradient(
+  --color-gradient-violet: radial-gradient(
     circle,
     color-mix(in oklab, var(--violet) 60%, transparent) 0%,
     transparent 70%
@@ -40,7 +40,7 @@ body {
   --muted: oklch(0.25 0.03 280);
   --muted-foreground: oklch(0.7 0.02 280);
 
-  --accent: oklch(0.75 0.18 350);
+  --color-accent: oklch(0.75 0.18 350);
   --accent-foreground: oklch(0.98 0.01 350);
 
   --destructive: oklch(0.65 0.25 25);
@@ -48,10 +48,22 @@ body {
 
   --border: oklch(1 0 0 / 0.08);
   --input: oklch(1 0 0 / 0.08);
-  --ring: oklch(0.78 0.15 305);
+  --color-ring: oklch(0.78 0.15 305);
 
-  --violet: oklch(0.78 0.15 305);
-  --pink: oklch(0.75 0.18 350);
+  --color-violet: oklch(0.78 0.15 305);
+  --color-pink: oklch(0.75 0.18 350);
 
- 
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-float-slow: float 4s ease-in-out infinite;
+  --animate-float-late: float 3.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }

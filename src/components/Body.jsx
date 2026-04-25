@@ -30,11 +30,12 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden bg-background">
+    <div className="w-full min-h-screen bg-background p-2">
+      
       <Navbar />
-      <main className="w-full max-sm:mt-0 w-[calc(100%-60px)] ">
-        <Outlet />
-      </main>
+      <main className="w-full "> 
+    <Outlet />
+  </main>
       {/* <Footer /> */}
     </div>
   );

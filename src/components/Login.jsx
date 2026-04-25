@@ -7,7 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../utils/constants";
 import DividerWithText from "./DividerText";
 
-import { Mail, Lock, TextQuote, Sparkles } from "lucide-react";
+import { Mail, Lock, TextQuote, Sparkles, Heart, MoonStar } from "lucide-react";
+import {
+  InfoGlassCard,
+  MessageGlassCard,
+  ProfileGlassCard,
+} from "./GlassCards";
 
 const Login = () => {
   const [firstName, setFirstName] = useState("");
@@ -66,11 +71,11 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full overflow-hidden min-h-screen max-w-[1200px]   mx-auto p-4   ">
+    <div className="w-full overflow-hidden  max-w-[1200px]   mx-auto    ">
       <div className="flex ">
         {/* login form */}
         <div className="flex flex-col w-full lg:w-[55%]  px-6 sm:px-10 lg:px-16 py-4 ">
-          <div className="card card-dash   max-w-[420px]  ">
+          <div className="card card-dash   max-w-[370px]  ">
             <div className="card-body flex flex-col gap-6  ">
               {/* login title */}
               <div className="flex flex-col gap-y-1 ">
@@ -166,15 +171,21 @@ const Login = () => {
                 </div>
 
                 {/* login/signup button */}
-                <div className="card-actions w-full  px-1">
+                <div className="card-actions w-full px-1">
                   <button
                     type="button"
-                    className="btn btn-secondary   w-full"
                     onClick={
                       isLogin ? () => handleLogin() : () => handleSignUp()
                     }
+                    className="w-full py-3 rounded-full font-semibold text-purple-900 transition-all duration-300
+      hover:brightness-110 active:scale-[0.98]"
+                    style={{
+                      background: "linear-gradient(135deg, #d8b4fe, #c084fc)",
+                      boxShadow:
+                        "0 0 24px rgba(192, 132, 252, 0.5), 0 0 48px rgba(192, 132, 252, 0.25)",
+                    }}
                   >
-                    {isLogin ? "Login" : "Sign Up"}
+                    {isLogin ? "Login →" : "Sign Up →"}
                   </button>
                 </div>
 
@@ -200,7 +211,7 @@ const Login = () => {
 
         {/* cards */}
         <div
-          className="hidden lg:flex flex-1 relative "
+          className="hidden lg:flex flex-1 flex-col relative  justify-center "
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.03)",
             backgroundImage: `
@@ -212,8 +223,40 @@ const Login = () => {
             borderLeft: "1px solid rgba(255, 255, 255, 0.06)",
           }}
         >
-          {/* gradient overlays */}
           <div className="absolute -top-20 -left-20 w-[200px] bg-primary-foreground h-[200px] opacity-60 blur-3xl" />
+          {/* ✅ Purple blob — top left */}
+          <div className="absolute -top-10 -left-10 w-[280px] h-[280px] rounded-full bg-primary/20 blur-[80px] pointer-events-none" />
+          <div className="absolute -bottom-10 -right-10 w-[280px] h-[280px] rounded-full bg-[#c084fc]/20 blur-[80px] pointer-events-none" />
+
+          <div className="flex flex-col gap-5 w-full max-w-md mx-auto ">
+            <ProfileGlassCard
+              name="Maya"
+              age={27}
+              subtitle="Coffee lover · 94% match"
+              avatarLabel="M"
+              avatarColor="from-purple-400 to-pink-500"
+              actionIcon={<Heart />}
+              className="w-full self-start animate-float [animation-delay:0s]"
+              style={{ animationDelay: "0s" }}
+            />
+
+            <MessageGlassCard
+              senderLabel="Maya replied"
+              message="Pottery + cold brew on Saturday?"
+              emoji="🌸"
+              className="w-[90%] self-end animate-float-slow [animation-delay:0.4s]"
+              style={{ animationDelay: "0.4s" }}
+            />
+
+            {/* Card 3 — slightly left of center */}
+            <InfoGlassCard
+              icon={<MoonStar />}
+              title="3 new matches today"
+              subtitle="curated just for you"
+              className="w-[95%] self-start  animate-float-late [animation-delay:0.8s]"
+              style={{ animationDelay: "0.8s" }}
+            />
+          </div>
         </div>
       </div>
     </div>
