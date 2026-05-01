@@ -32,7 +32,13 @@ const Feed = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-2 py-2">
-      {feed.length && <UserCard user={feed[2]} />}
+      {feed.length && 
+          feed.map((user)=>{
+            return (
+               <UserCard user={user}/>
+            )
+          })
+      }
     </div>
   );
 };

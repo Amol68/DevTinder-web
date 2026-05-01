@@ -211,7 +211,7 @@ const Login = () => {
 
         {/* cards */}
         <div
-          className="hidden lg:flex flex-1 flex-col relative  justify-center "
+          className="hidden lg:flex flex-1 flex-col relative  justify-center gap-8"
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.03)",
             backgroundImage: `
@@ -228,6 +228,17 @@ const Login = () => {
           <div className="absolute -top-10 -left-10 w-[280px] h-[280px] rounded-full bg-primary/20 blur-[80px] pointer-events-none" />
           <div className="absolute -bottom-10 -right-10 w-[280px] h-[280px] rounded-full bg-[#c084fc]/20 blur-[80px] pointer-events-none" />
 
+          <div className="inline-flex items-center gap-2 max-w-[250px] rounded-full border border-violet-400/30 bg-violet-500/10 px-4 py-1.5 backdrop-blur-sm shadow-[0_0_20px_rgba(168,85,247,0.15)]">
+            {/* Icon */}
+            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-violet-400/15">
+              <Sparkles className="h-3.5 w-3.5 text-violet-300" />
+            </div>
+
+            {/* Text */}
+            <span className="text-sm font-semibold tracking-wide text-violet-200">
+              48,219 hearts beating
+            </span>
+          </div>
           <div className="flex flex-col gap-5 w-full max-w-md mx-auto ">
             <ProfileGlassCard
               name="Maya"
@@ -256,6 +267,10 @@ const Login = () => {
               className="w-[95%] self-start  animate-float-late [animation-delay:0.8s]"
               style={{ animationDelay: "0.8s" }}
             />
+          </div>
+          <div className=" flex justify-center flex-col  items-center p-2">
+            <div className="font-bold text-lg">Real Connections.</div>
+            <div className="text-sm">No Endless Swiping </div>
           </div>
         </div>
       </div>
