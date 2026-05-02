@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
-import { LocateFixed, MapPin } from "lucide-react";
+import { CodeXml, LocateFixed, MapPin, User, UserStar } from "lucide-react";
+import FormTitle from "./ui/FormTitle";
 
 const Profile = () => {
   const user = useSelector((state) => state.user);
@@ -20,6 +21,8 @@ const Profile = () => {
   const [age, setAge] = useState(null);
   const [about, setAbout] = useState();
   const [photoUrl, setPhotourl] = useState();
+  const [skillInput, setSkillInput] = useState("");
+  const [skills, setSkills] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({
     city: "",
@@ -106,6 +109,28 @@ const Profile = () => {
     });
   };
 
+  const handleAddSkill = () => {
+    const trimmed = skillInput.trim();
+    if (trimmed) return;
+    if (!skills.includes(trimmed)) {
+      setSkills((prev) => {
+        return [...prev, trimmed];
+      });
+    }
+    setSkillInput("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleAddSkill();
+    }
+  };
+
+  const removeSkill = (skillToRemove) => {
+    setSkills(skills.filter((skill) => skill !== skillToRemove));
+  };
+
   useEffect(() => {
     if (user) {
       setFirstName(user.firstName || "");
@@ -130,164 +155,174 @@ const Profile = () => {
       {/* Main Section */}
       <div className="flex flex-col md:flex-row gap-6 p-8 max-w-4x mx-auto w-full ">
         {/*  Form Section */}
-        <div className="flex-1 flex flex-col p-6 rounded-2xl shadow-sm border border-gray-600 gap-y-4">
-          {/* firstname */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">First Name</legend>
-            <input
-              type="text"
-              className="input w-full"
-              value={firstName}
-              placeholder="Type here"
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </fieldset>
+        <div className="flex-1 flex flex-col p-6 rounded-2xl shadow-sm bg-card border border-gray-600 gap-y-6">
+          {/* SECTION: Identity */}
+          <FormTitle icon={<User className="w-4 h-4" />} title="Identity" />
 
-          {/* lastname */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Last Name</legend>
-            <input
-              type="text"
-              className="input w-full"
-              value={lastName}
-              placeholder="Type here"
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </fieldset>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* First Name */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">First Name</legend>
+              <input
+                type="text"
+                className="input w-full"
+                value={firstName || ""}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </fieldset>
 
-          {/* about */}
+            {/* Last Name */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Last Name</legend>
+              <input
+                type="text"
+                className="input w-full"
+                value={lastName || ""}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </fieldset>
+
+            {/* Gender */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Gender</legend>
+              <input
+                type="text"
+                className="input w-full"
+                value={gender || ""}
+                onChange={(e) => setGender(e.target.value)}
+              />
+            </fieldset>
+
+            {/* Age */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Age</legend>
+              <input
+                type="number"
+                className="input w-full"
+                value={age || ""}
+                onChange={(e) => setAge(e.target.value)}
+              />
+            </fieldset>
+          </div>
+
+          {/* About - Full Width */}
           <fieldset className="fieldset">
             <legend className="fieldset-legend">About</legend>
             <textarea
               className="textarea w-full"
-              value={about}
-              placeholder="Type here"
               rows={3}
+              value={about || ""}
               onChange={(e) => setAbout(e.target.value)}
             />
           </fieldset>
 
-          {/* gender */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Gender</legend>
-            <input
-              type="text"
-              className="input w-full"
-              value={gender}
-              placeholder="Type here"
-              onChange={(e) => setGender(e.target.value)}
-            />
-          </fieldset>
-
-          {/* age */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Age</legend>
-            <input
-              type="number"
-              className="input w-full"
-              value={age}
-              placeholder="Type here"
-              onChange={(e) => setAge(e.target.value)}
-            />
-          </fieldset>
-
-          {/* photo URL */}
+          {/* Photo URL */}
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Photo URL</legend>
             <input
               type="text"
               className="input w-full"
-              value={photoUrl}
-              placeholder="Type here"
+              value={photoUrl || ""}
               onChange={(e) => setPhotourl(e.target.value)}
             />
           </fieldset>
 
-          {/* location section */}
-          <div className="flex flex-col">
-            {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center gap-4 w-full">
-              {/* Left Section */}
-              <div className="flex items-center gap-2 w-full md:w-auto md:flex-1">
-                <MapPin className="w-5 h-5 text-blue-400 shrink-0" />
+          {/* SECTION: Skills */}
+          <FormTitle icon={<CodeXml className="w-4 h-4" />} title="Skills" />
 
-                <h2 className="text-sm sm:text-base md:text-lg font-semibold text-white">
-                  Add Your Location
-                </h2>
-              </div>
+          <fieldset className="rounded-xl p-1">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                className="input w-full"
+                value={skillInput}
+                onChange={(e) => setSkillInput(e.target.value)}
+                placeholder="Type a skill"
+                onKeyDown={handleKeyDown}
+              />
 
-              {/* Right Section */}
               <button
-                onClick={detectLocation}
-                className="
-      w-full md:w-auto
-      flex items-center justify-center gap-2
-      px-4 py-3
-      rounded-xl
-      bg-blue-500 hover:bg-blue-600
-      transition
-      text-sm sm:text-base md:text-sm
-      text-white font-medium
-      whitespace-nowrap
-    "
+                type="button"
+                onClick={handleAddSkill}
+                className="px-4 py-2 rounded-xl bg-primary-foreground text-white"
               >
-                <LocateFixed className="w-4 h-4 shrink-0" />
-                {isLoading ? "Detecting..." : "Use Current Location"}
+                Add
               </button>
             </div>
 
-            {/* city */}
-            <div className="w-full">
+            <div className="flex flex-wrap gap-2 mt-4">
+              {skills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-sm"
+                >
+                  {skill}
+                  <button
+                    onClick={() => removeSkill(skill)}
+                    className="text-blue-400 hover:text-red-400"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          </fieldset>
+
+          {/* SECTION: Location */}
+          <>
+          <div className="flex">
+
+            <FormTitle icon={<MapPin className="w-4 h-4" />} title="Location" />
+
+            <div className="flex flex-col md:flex-row md:items-center gap-1">
+              <button
+                onClick={detectLocation}
+                className="w-full md:w-auto px-4 py-2 rounded-xl bg-primary-foreground  text-white"
+              >
+                {isLoading ? "Detecting..." : "Use Current Location"}
+              </button>
+            </div>
+          </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* City */}
               <fieldset className="fieldset">
                 <legend className="fieldset-legend">City</legend>
                 <input
                   type="text"
                   className="input w-full"
-                  value={location.city}
-                  placeholder="Type here"
-                  onChange={(e) => {
-                    updateLocation("city", e.target.value);
-                  }}
+                  value={location.city || ""}
+                  onChange={(e) => updateLocation("city", e.target.value)}
                 />
               </fieldset>
-            </div>
 
-            {/* state */}
-            <div className="w-full">
+              {/* State */}
               <fieldset className="fieldset">
                 <legend className="fieldset-legend">State</legend>
                 <input
                   type="text"
                   className="input w-full"
-                  value={location.state}
-                  placeholder="Type here"
-                  onChange={(e) => {
-                    updateLocation("state", e.target.value);
-                  }}
+                  value={location.state || ""}
+                  onChange={(e) => updateLocation("state", e.target.value)}
                 />
               </fieldset>
-            </div>
 
-            {/* country */}
-            <div className="w-full">
+              {/* Country */}
               <fieldset className="fieldset">
                 <legend className="fieldset-legend">Country</legend>
                 <input
                   type="text"
                   className="input w-full"
-                  value={location.country}
-                  placeholder="Type here"
-                  onChange={(e) => {
-                    updateLocation("country", e.target.value);
-                  }}
+                  value={location.country || ""}
+                  onChange={(e) => updateLocation("country", e.target.value)}
                 />
               </fieldset>
             </div>
-          </div>
+          </>
 
-          {/* Button */}
-          <div className="flex justify-end pt-2">
-            <button className="btn btn-secondary" onClick={handleEdit}>
+          {/* Save Button */}
+          <div className="flex justify-end pt-4">
+            <button className="btn btn-secondary px-6" onClick={handleEdit}>
               Save Changes
             </button>
           </div>
