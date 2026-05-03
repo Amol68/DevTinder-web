@@ -4,7 +4,7 @@ const FormTitle = ({ icon, title }) => {
   return (
     <div className="flex items-center gap-3 ">
       {/* Icon Badge */}
-      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-purple-300">
+      <div className="size-6 flex items-center justify-center rounded-full bg-white/10 text-ring">
         {icon}
       </div>
 

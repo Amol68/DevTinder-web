@@ -11,6 +11,7 @@ import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
 import { CodeXml, LocateFixed, MapPin, User, UserStar } from "lucide-react";
 import FormTitle from "./ui/FormTitle";
+import { Input } from "./inputs/Input";
 
 const Profile = () => {
   const user = useSelector((state) => state.user);
@@ -29,6 +30,8 @@ const Profile = () => {
     state: "",
     country: "",
   });
+
+  console.log({ skillInput });
 
   const [error, setError] = useState("");
 
@@ -111,7 +114,8 @@ const Profile = () => {
 
   const handleAddSkill = () => {
     const trimmed = skillInput.trim();
-    if (trimmed) return;
+    console.log({ trimmed });
+    if (!trimmed) return;
     if (!skills.includes(trimmed)) {
       setSkills((prev) => {
         return [...prev, trimmed];
@@ -142,6 +146,8 @@ const Profile = () => {
     }
   }, [user]);
 
+  console.log(skills);
+
   return (
     <div className="min-h-screen flex flex-col ">
       {/*  Welcome Header */}
@@ -153,7 +159,7 @@ const Profile = () => {
       </div>
 
       {/* Main Section */}
-      <div className="flex flex-col md:flex-row gap-6 p-8 max-w-4x mx-auto w-full ">
+      <div className="flex flex-col md:flex-row gap-6 p-8 max-w-4x mx-auto w-full  grid md:grid-cols-2">
         {/*  Form Section */}
         <div className="flex-1 flex flex-col p-6 rounded-2xl shadow-sm bg-card border border-gray-600 gap-y-6">
           {/* SECTION: Identity */}
@@ -161,48 +167,38 @@ const Profile = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* First Name */}
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">First Name</legend>
-              <input
-                type="text"
-                className="input w-full"
-                value={firstName || ""}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </fieldset>
+            <Input
+              label={"Firstname"}
+              type={"text"}
+              value={firstName}
+              onChange={setFirstName}
+            />
 
             {/* Last Name */}
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Last Name</legend>
-              <input
-                type="text"
-                className="input w-full"
-                value={lastName || ""}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </fieldset>
+            <Input
+              label={"Lastname"}
+              type={"text"}
+              value={lastName}
+              onChange={setLastName}
+            />
 
             {/* Gender */}
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Gender</legend>
-              <input
-                type="text"
-                className="input w-full"
-                value={gender || ""}
-                onChange={(e) => setGender(e.target.value)}
-              />
-            </fieldset>
+            <Input
+              label={"Gender"}
+              type={"text"}
+              value={gender}
+              onChange={setGender}
+            />
 
             {/* Age */}
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">Age</legend>
-              <input
-                type="number"
-                className="input w-full"
-                value={age || ""}
-                onChange={(e) => setAge(e.target.value)}
-              />
-            </fieldset>
+            <Input
+              label={"Age"}
+              type={"number"}
+              value={age}
+              onChange={setAge}
+            />
+
+            {/* Photo URL */}
           </div>
 
           {/* About - Full Width */}
@@ -215,127 +211,112 @@ const Profile = () => {
               onChange={(e) => setAbout(e.target.value)}
             />
           </fieldset>
-
-          {/* Photo URL */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">Photo URL</legend>
-            <input
-              type="text"
-              className="input w-full"
-              value={photoUrl || ""}
-              onChange={(e) => setPhotourl(e.target.value)}
-            />
-          </fieldset>
+          <Input
+            label={"Photo URL"}
+            type={"text"}
+            value={photoUrl || ""}
+            onChange={setPhotourl}
+          />
 
           {/* SECTION: Skills */}
-          <FormTitle icon={<CodeXml className="w-4 h-4" />} title="Skills" />
+          <div className="flex flex-col gap-3">
+            <FormTitle icon={<CodeXml className="w-4 h-4" />} title="Stack" />
 
-          <fieldset className="rounded-xl p-1">
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="text"
-                className="input w-full"
-                value={skillInput}
-                onChange={(e) => setSkillInput(e.target.value)}
-                placeholder="Type a skill"
-                onKeyDown={handleKeyDown}
-              />
+            <div className="flex items-end gap-2 ">
+              <div className="flex-1">
+                <Input
+                  label="Skills"
+                  type="text"
+                  value={skillInput}
+                  onChange={setSkillInput}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
 
               <button
                 type="button"
                 onClick={handleAddSkill}
-                className="px-4 py-2 rounded-xl bg-primary-foreground text-white"
+                className="h-9 px-4 rounded-xl text-xs font-medium bg-primary-foreground text-ring flex-shrink-0 hover:opacity-90 transition-opacity"
               >
                 Add
               </button>
+
+              
             </div>
 
-            <div className="flex flex-wrap gap-2 mt-4">
-              {skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-sm"
-                >
-                  {skill}
-                  <button
-                    onClick={() => removeSkill(skill)}
-                    className="text-blue-400 hover:text-red-400"
+            <div className="flex flex-wrap gap-2 m">
+                {skills.map((skill, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 px-2 text-violet bg-primary/10 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-sm"
                   >
-                    ✕
-                  </button>
-                </div>
-              ))}
-            </div>
-          </fieldset>
+                    {skill}
+                    <button
+                      onClick={() => removeSkill(skill)}
+                      className="text-primary/50 hover:text-red-400 text-[10px]"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
+          </div>
 
           {/* SECTION: Location */}
-          <>
-          <div className="flex">
-
-            <FormTitle icon={<MapPin className="w-4 h-4" />} title="Location" />
-
-            <div className="flex flex-col md:flex-row md:items-center gap-1">
+          <div className="flex flex-col gap-4">
+            {/* Title + Detect button */}
+            <div className="flex items-center gap-2 justify-start">
+              <FormTitle
+                icon={<MapPin className="w-4 h-4" />}
+                title="Location"
+              />
               <button
                 onClick={detectLocation}
-                className="w-full md:w-auto px-4 py-2 rounded-xl bg-primary-foreground  text-white"
+                className="px-4 py-2 text-xs font-medium cursor-pointer text-ring rounded-xl bg-primary-foreground  flex-shrink-0 hover:opacity-90 transition-opacity"
               >
                 {isLoading ? "Detecting..." : "Use Current Location"}
               </button>
             </div>
-          </div>
 
+            {/* City / State / Country */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* City */}
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend">City</legend>
-                <input
-                  type="text"
-                  className="input w-full"
-                  value={location.city || ""}
-                  onChange={(e) => updateLocation("city", e.target.value)}
-                />
-              </fieldset>
-
-              {/* State */}
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend">State</legend>
-                <input
-                  type="text"
-                  className="input w-full"
-                  value={location.state || ""}
-                  onChange={(e) => updateLocation("state", e.target.value)}
-                />
-              </fieldset>
-
-              {/* Country */}
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend">Country</legend>
-                <input
-                  type="text"
-                  className="input w-full"
-                  value={location.country || ""}
-                  onChange={(e) => updateLocation("country", e.target.value)}
-                />
-              </fieldset>
+              <Input
+                label="City"
+                type="text"
+                value={location.city || ""}
+                onChange={(e) => updateLocation("city", e.target.value)}
+              />
+              <Input
+                label="State"
+                type="text"
+                value={location.state || ""}
+                onChange={(e) => updateLocation("state", e.target.value)}
+              />
+              <Input
+                label="Country"
+                type="text"
+                value={location.country || ""}
+                onChange={(e) => updateLocation("country", e.target.value)}
+              />
             </div>
-          </>
 
-          {/* Save Button */}
-          <div className="flex justify-end pt-4">
-            <button className="btn btn-secondary px-6" onClick={handleEdit}>
-              Save Changes
-            </button>
+            {/* Save */}
+            <div className="flex justify-end pt-2">
+              <button
+                onClick={handleEdit}
+                className="px-6 py-2 rounded-xl text-sm font-medium bg-primary-foreground text-white hover:opacity-90 transition-opacity"
+              style={{
+  background: "linear-gradient(135deg, var(--color-pink), var(--color-violet))",
+  boxShadow: "0 0 20px color-mix(in oklch, var(--color-pink) 35%, transparent), 0 0 40px color-mix(in oklch, var(--color-violet) 20%, transparent)",
+}}
+              >
+                Save Changes
+              </button>
+            </div>
           </div>
         </div>
 
-        {/*  User Card Section */}
-        <div className="flex-1 flex justify-center md:justify-start ">
-          <UserCard
-            user={{ firstName, lastName, gender, age, about, photoUrl }}
-            isProfile={true}
-            className={"h-fit"}
-          />
-        </div>
+        <div></div>
       </div>
     </div>
   );

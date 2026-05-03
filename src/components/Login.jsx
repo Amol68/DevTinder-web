@@ -13,6 +13,7 @@ import {
   MessageGlassCard,
   ProfileGlassCard,
 } from "./GlassCards";
+import { Input } from "./inputs/Input";
 
 const Login = () => {
   const [firstName, setFirstName] = useState("");
@@ -91,83 +92,40 @@ const Login = () => {
 
               <div className="flex flex-col justify-center items-center gap-y-8 ">
                 {/* input fields */}
-                <div className="flex flex-col justify-start items-center gap-y-1 w-full">
+                <div className="flex flex-col justify-start items-center gap-3 w-full">
                   {!isLogin && (
                     <>
-                      <div className="w-full">
-                        <fieldset className="fieldset">
-                          <label className="flex gap-1 items-center pl-1">
-                            <TextQuote size={15} />
-                            <span>FirstName</span>
-                          </label>
+                      <Input
+                        label={"Firstname"}
+                        type={"text"}
+                        value={firstName}
+                        onChange={setFirstName}
+                      />
 
-                          <input
-                            type="text"
-                            className="input outline-0"
-                            value={firstName}
-                            placeholder="Type here"
-                            onChange={(e) => {
-                              setFirstName(e.target.value);
-                            }}
-                          />
-                        </fieldset>
-                      </div>
-
-                      <div className="w-full">
-                        <fieldset className="fieldset">
-                          <label className="flex gap-1 items-center pl-1">
-                            <TextQuote size={15} />
-                            <span>LastName</span>
-                          </label>{" "}
-                          <input
-                            type="text"
-                            className="input outline-0"
-                            value={lastName}
-                            placeholder="Type here"
-                            onChange={(e) => {
-                              setLastName(e.target.value);
-                            }}
-                          />
-                        </fieldset>
-                      </div>
+                      <Input
+                        label={"Lastname"}
+                        type={"text"}
+                        value={lastName}
+                        onChange={setLastName}
+                      />
                     </>
                   )}
 
                   {/* email Id */}
-                  <div className=" w-full ">
-                    <fieldset className="fieldset w-full ">
-                      <label className="flex gap-1 items-center pl-1">
-                        <Mail size={15} />
-                        <span>Email</span>
-                      </label>
-                      <input
-                        type="email"
-                        className="input w-full outline-0"
-                        value={email}
-                        placeholder="Type here"
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </fieldset>
-                  </div>
+                  <Input
+                    label={"Email"}
+                    type={"email"}
+                    value={email}
+                    onChange={setEmail}
+                  />
 
                   {/* password */}
-                  <div className="w-full">
-                    <fieldset className="fieldset w-full">
-                      <label className="flex gap-1 items-center pl-1">
-                        <Lock size={15} />
-                        <span>Password</span>
-                      </label>{" "}
-                      <input
-                        type="text"
-                        className="input outline-0 w-full"
-                        value={password}
-                        placeholder="Type here"
-                        onChange={(e) => {
-                          setPassword(e.target.value);
-                        }}
-                      />
-                    </fieldset>
-                  </div>
+                  <Input
+                    label={"Password"}
+                    type={"text"}
+                    value={password}
+                    onChange={setPassword}
+                  />
                 </div>
 
                 {/* login/signup button */}
