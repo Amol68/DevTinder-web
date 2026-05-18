@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { baseUrl } from "../utils/constants";
-import { removeUser } from "../utils/userSlice";
-import { deleteFeed } from "../utils/feedSlice";
-import defaultUser from "../assets/images/defaultUser.jpeg";
+import { baseUrl } from "../../utils/constants"; 
+import { removeUser } from "../../utils/userSlice"; 
+import { deleteFeed } from "../../utils/feedSlice"; 
+import defaultUser from "../../assets/images/defaultUser.jpeg"
 const Navbar = () => {
   const user = useSelector((store) => store.user);
 

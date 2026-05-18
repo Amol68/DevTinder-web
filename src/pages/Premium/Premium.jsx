@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Check } from "lucide-react";
-import { baseUrl } from "../utils/constants";
+import { baseUrl } from "../../utils/constants"; 
 import { useEffect, useState } from "react";
 
 const Premium = () => {

@@ -1,18 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Body from "./components/Body";
-import Login from "./components/Login";
-import Profile from "./components/Profile";
+import Body from "./components/layout/Body";
 import { Provider } from "react-redux";
 import { store } from "./utils/appStore";
-import Feed from "./components/Feed";
-import Requests from "./components/Requests";
-import Connections from "./components/Connections";
-import Terms from "./pages/Terms";
-import Refund from "./pages/Refund";
-import Privacy from "./pages/Privacy";
-import Shipping from "./pages/Shipping";
-import Premium from "./components/Premium";
-import Chat from "./components/Chat";
+import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
+import Feed from "./pages/Feed/Feed";
+import Requests from "./pages/Requests/Requests";
+import Chat from "./pages/Chat/Chat";
+import Shipping from "./pages/Shipping/Shipping";
+import Refund from "./pages/Refund/Refund";
+import Terms from "./pages/Terms/Terms";
+import Privacy from "./pages/Privacy/Privacy";
+import Premium from "./pages/Premium/Premium";
+import Connections from "./pages/Connections/Connections";
+
 function App() {
   return (
     <Provider store={store}>

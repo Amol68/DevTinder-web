@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { createSocketConnection } from "../utils/socket";
+import { createSocketConnection } from "../../utils/socket"
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { baseUrl } from "../utils/constants";
+import { baseUrl } from "../../utils/constants";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);

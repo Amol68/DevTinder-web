@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import UserCard from "./UserCard";
+import UserCard from  "../../components/ui/UserCard"
 import axios from "axios";
-import { baseUrl } from "../utils/constants";
+import { baseUrl } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const EditProfile = ({ user }) => {

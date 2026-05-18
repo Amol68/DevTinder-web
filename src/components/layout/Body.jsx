@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import Navbar from "./Navbar";
+
 import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import axios from "axios";
-import { baseUrl } from "../utils/constants";
-import { addUser } from "../utils/userSlice";
+import { baseUrl } from "../../utils/constants";
+import { addUser } from "../../utils/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Navbar from "./Navbar";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -30,12 +31,11 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-background p-2">
-      
+    <div className="w-full min-h-screen bg-background p-2  ">
       <Navbar />
-      <main className="w-full "> 
-    <Outlet />
-  </main>
+      <main className="w-full flex flex-col justify-center items-center p-3 ">
+        <Outlet />
+      </main>
       {/* <Footer /> */}
     </div>
   );

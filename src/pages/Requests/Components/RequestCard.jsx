@@ -1,7 +1,7 @@
 import axios from "axios";
-import defaultUser from "../assets/images/defaultUser.jpeg"
-import { baseUrl } from "../utils/constants";
-import { removeRequest } from "../utils/requestSlice";
+import defaultUser from "../../../assets/images/defaultUser.jpeg"
+import { baseUrl } from "../../../utils/constants"
+import { removeRequest } from "../../../utils/requestSlice"
 import { useDispatch } from "react-redux";
 
 const RequestCard = ({request}) => {

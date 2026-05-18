@@ -2,18 +2,18 @@
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
+import { addUser } from "../../utils/userSlice"; 
 import { useNavigate } from "react-router-dom";
-import { baseUrl } from "../utils/constants";
-import DividerWithText from "./DividerText";
+import { baseUrl } from "../../utils/constants"; 
+import DividerWithText from "../../components/ui/DividerText"
 
 import { Mail, Lock, TextQuote, Sparkles, Heart, MoonStar } from "lucide-react";
 import {
   InfoGlassCard,
   MessageGlassCard,
   ProfileGlassCard,
-} from "./GlassCards";
-import { Input } from "./inputs/Input";
+} from "../../components/ui/GlassCards"
+import { Input } from "../../components/inputs/Input";
 
 const Login = () => {
   const [firstName, setFirstName] = useState("");
@@ -169,7 +169,7 @@ const Login = () => {
 
         {/* cards */}
         <div
-          className="hidden lg:flex flex-1 flex-col relative  justify-center gap-8"
+          className="hidden lg:flex flex-1 flex-col relative  justify-center gap-8 rounded-2xl"
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.03)",
             backgroundImage: `
@@ -182,7 +182,7 @@ const Login = () => {
           }}
         >
           <div className="absolute -top-20 -left-20 w-[200px] bg-primary-foreground h-[200px] opacity-60 blur-3xl" />
-          {/* ✅ Purple blob — top left */}
+          {/* Purple blob — top left */}
           <div className="absolute -top-10 -left-10 w-[280px] h-[280px] rounded-full bg-primary/20 blur-[80px] pointer-events-none" />
           <div className="absolute -bottom-10 -right-10 w-[280px] h-[280px] rounded-full bg-[#c084fc]/20 blur-[80px] pointer-events-none" />
 

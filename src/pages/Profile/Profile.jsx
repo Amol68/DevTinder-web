@@ -2,16 +2,16 @@
 
 // import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import EditProfile from "./EditProfile";
+import EditProfile from "../../components/ui/EditProfile";
 import axios from "axios";
-import { baseUrl } from "../utils/constants";
+import { baseUrl } from "../../utils/constants"
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser } from "../utils/userSlice";
-import UserCard from "./UserCard";
+import { addUser } from "../../utils/userSlice"
+import UserCard from  "../../components/ui/UserCard"
 import { CodeXml, LocateFixed, MapPin, User, UserStar } from "lucide-react";
-import FormTitle from "./ui/FormTitle";
-import { Input } from "./inputs/Input";
+import FormTitle from "../../components/ui/FormTitle"
+import { Input } from  "../../components/inputs/Input"
 
 const Profile = () => {
   const user = useSelector((state) => state.user);
@@ -149,7 +149,10 @@ const Profile = () => {
   console.log(skills);
 
   return (
-    <div className="min-h-screen flex flex-col ">
+    <div className="min-h-screen flex flex-col p-4 ">
+      <div className="absolute -top-10 -left-10 w-[280px] h-[280px] rounded-full bg-primary/20 blur-[80px] pointer-events-none" />
+      <div className="absolute -bottom-10 -right-10 w-[280px] h-[280px] rounded-full bg-[#c084fc]/20 blur-[80px] pointer-events-none" />
+
       {/*  Welcome Header */}
       <div className="px-8 py-4  shadow-sm">
         <h2 className="font-semibold text-2xl ">{`Welcome ${user.firstName ?? ""} 👋`}</h2>
@@ -240,26 +243,24 @@ const Profile = () => {
               >
                 Add
               </button>
-
-              
             </div>
 
             <div className="flex flex-wrap gap-2 m">
-                {skills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 px-2 text-violet bg-primary/10 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-sm"
+              {skills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 px-2 text-violet bg-primary/10 py-0.5 rounded-full bg-blue-500/20 text-blue-300 text-sm"
+                >
+                  {skill}
+                  <button
+                    onClick={() => removeSkill(skill)}
+                    className="text-primary/50 hover:text-red-400 text-[10px]"
                   >
-                    {skill}
-                    <button
-                      onClick={() => removeSkill(skill)}
-                      className="text-primary/50 hover:text-red-400 text-[10px]"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ))}
-              </div>
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* SECTION: Location */}
@@ -284,7 +285,10 @@ const Profile = () => {
                 label="City"
                 type="text"
                 value={location.city || ""}
-                onChange={(e) => updateLocation("city", e.target.value)}
+                onChange={(e) => {
+                  alert("")
+                  updateLocation("city", e.target.value);
+                }}
               />
               <Input
                 label="State"
@@ -305,10 +309,12 @@ const Profile = () => {
               <button
                 onClick={handleEdit}
                 className="px-6 py-2 rounded-xl text-sm font-medium bg-primary-foreground text-white hover:opacity-90 transition-opacity"
-              style={{
-  background: "linear-gradient(135deg, var(--color-pink), var(--color-violet))",
-  boxShadow: "0 0 20px color-mix(in oklch, var(--color-pink) 35%, transparent), 0 0 40px color-mix(in oklch, var(--color-violet) 20%, transparent)",
-}}
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--color-pink), var(--color-violet))",
+                  boxShadow:
+                    "0 0 20px color-mix(in oklch, var(--color-pink) 35%, transparent), 0 0 40px color-mix(in oklch, var(--color-violet) 20%, transparent)",
+                }}
               >
                 Save Changes
               </button>
@@ -316,7 +322,23 @@ const Profile = () => {
           </div>
         </div>
 
-        <div></div>
+        {/*  User Card Section */}
+        <div className="flex-1 flex justify-center md:justify-start  ">
+          <UserCard
+            user={{
+              firstName,
+              lastName,
+              gender,
+              age,
+              about,
+              photoUrl,
+              skills,
+              location,
+            }}
+            isProfile={true}
+            className={"h-fit"}
+          />
+        </div>
       </div>
     </div>
   );

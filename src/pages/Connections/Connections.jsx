@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { baseUrl } from "../utils/constants";
+import { baseUrl } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addConnections } from "../utils/connectionSlice";
+import { addConnections } from "../../utils/connectionSlice"; 
 //import defaultUser from "../assets/images/defaultUser.jpeg";
-import ConnectionCard from "./ConnectionCard";
+
 import { useNavigate } from "react-router-dom";
+import ConnectionCard from "./components/ConnectionCard";
 const Connections = () => {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);

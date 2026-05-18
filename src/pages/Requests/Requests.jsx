@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { baseUrl } from "../utils/constants";
+import { baseUrl } from "../../utils/constants"; 
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests } from "../utils/requestSlice";
+import { addRequests } from "../../utils/requestSlice"; 
 
-import RequestCard from "./RequestCard";
+import RequestCard from "./Components/RequestCard";
 
 const Requests = () => {
   const dispatch = useDispatch();
